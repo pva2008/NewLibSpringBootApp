@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>show</title>
+</head>
+<body>
+<div th:each="book1 : ${FromOldLibList}">
+    <a th:text="${'Автор--->'+book1.getAuthor()+',         Произведение-->'+book1.getTitle()}">Author</a>
+    <!--    <a  th:text="${book1.getTitle()}">Author</a>-->
+    <br/><br/>
+
+</div>
+
+</body>
+</html>
