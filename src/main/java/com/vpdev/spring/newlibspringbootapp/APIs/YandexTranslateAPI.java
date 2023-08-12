@@ -15,9 +15,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 //@Component
-//@PropertySource("classpath:YandexAPI.properties")
+//@PropertySource("classpath:yandexAPI.properties")
 public class YandexTranslateAPI implements CommandLineRunner {
-    //токен и диск задаются в YandexAPI.properties
+    //токен и диск задаются в yandexAPI.properties
     @Value("${IAMtoken}")
     private String IAMtoken;
     @Value("${folderId}")

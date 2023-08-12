@@ -14,7 +14,7 @@ public class NewLibSpringBootAppApplication {
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(NewLibSpringBootAppApplication.class, args);
-        openHomePage("http://localhost:8081/books/restsavetodb");
+        openHomePage();
         regresApi();
     }
 
