@@ -1,6 +1,7 @@
 package com.vpdev.spring.newlibspringbootapp.APIs;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class ConsumerRegres {
 
 
@@ -29,6 +31,11 @@ public class ConsumerRegres {
         System.out.println(string);
         System.out.println(response);
         System.out.println("****************************************************");
+        log.info("*******************reqres.in************************");
+        log.info(string);
+        log.info(response);
+        log.info("****************************************************");
+
     }
 
 }
