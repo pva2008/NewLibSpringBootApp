@@ -11,5 +11,4 @@ import java.util.List;
 public interface BooksRepository extends JpaRepository<Book, Integer> {
 
     public List<Book> findByTitleStartingWith(String query);
-
 }

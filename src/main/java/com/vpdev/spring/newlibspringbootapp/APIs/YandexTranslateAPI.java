@@ -34,42 +34,25 @@ public class YandexTranslateAPI implements CommandLineRunner {
         String sebtanceToTranslate = scanner.nextLine();
 
         String URL = "https://translate.api.cloud.yandex.net/translate/v2/translate";
-        //Для помещения заголовков в запрос создадим объект HttpHeaders(import org.springframework.http.HttpHeaders;)
+
         HttpHeaders httpHeaders = new HttpHeaders();
-        //зарезервированный заголовок
+
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        //кастомный в формате ключ,Bearer+пробел+значение
-        httpHeaders.add("Authorization", "Bearer " +
-                IAMtoken);
-        //создаем мапу которая потом в JSON преобразится
+        httpHeaders.add("Authorization", "Bearer " + IAMtoken);
+
         Map<String, String> jsonData = new HashMap<>();
+
         jsonData.put("folderId", folderId);
-        //"texts": ["Hello", "World"], для обозначения массива элементов в JSON
         jsonData.put("texts", "[" + sebtanceToTranslate + "]");
         jsonData.put("targetLanguageCode", "en");
 
-        //request в конструктор ложим нашу мапу с данными и заголовки
         HttpEntity<Map<String, String>> request = new HttpEntity<>(jsonData, httpHeaders);
 
-        // String stringFromYandex = restTemplate.postForObject(URL,request,String.class);
-        //Для парсинга не в строку а в класс и соответственно парсить его не надо а можно через геттеры просто вывести
         YandexResponse objectFromYandex = restTemplate.postForObject(URL, request, YandexResponse.class);
 
-//        //так мы получим строчку формате JSON и ее нужно распарсить
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        //objectMapper возвратит jsonNode с распаршенными ключами
-//        JsonNode jsonNode = objectMapper.readTree(stringFromYandex); // выбрасывает throws JsonProcessingException {
-//        //и так как нам приходит в ответ массив переводов то выводим его
-//        System.out.println("Перевод :" + jsonNode.get("Translations").get(0).get("text"));
-//        //Но что б каждый раз не парсить есть ответ можно создать собственный класс для распарсивания
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&_перевод_&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
         System.out.println("Перевод :" + objectFromYandex.getTranslations().get(0).getText());
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
-
     }
-
-
 }

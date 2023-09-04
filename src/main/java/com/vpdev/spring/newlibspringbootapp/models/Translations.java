@@ -1,9 +1,10 @@
 package com.vpdev.spring.newlibspringbootapp.models;
 
 public class Translations {
+
     private String text;
     private String detectedLanguageCode;
-    //и обязательно геттеры и сеттеры
+
 
     public String getText() {
         return text;

@@ -5,10 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+//https://habr.com/ru/articles/580062/
 @Configuration
-//сканирует пакеты приложений, чтобы найти все Spring Beans, декорированные методами @Scheduled, и устанавливает график их выполнения.
 @EnableScheduling
-//отключить планирование во время выполнения тестов.
 @ConditionalOnProperty(name = "scheduler.enabled", matchIfMissing = true)
 @PropertySource("classpath:scheduler.properties")
 public class SchedulerConfig {

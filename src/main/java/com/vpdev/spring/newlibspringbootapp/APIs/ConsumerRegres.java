@@ -15,15 +15,19 @@ public class ConsumerRegres {
 
 
     public static void regresApi() {
+
         String URL = "https://reqres.in/api/users/3";
         String URL2 = "https://reqres.in/api/users";
+
         Map<String, String> mapToSend = new HashMap<>();
+
         RestTemplate restTemplate = new RestTemplate();
 
         mapToSend.put("name", "Valera");
         mapToSend.put("job", "data engineer");
-        //для отправки мапы по сети мы должны ее упаковать в HttpEntity
+
         HttpEntity<Map<String, String>> request = new HttpEntity<>(mapToSend);
+
         String string = restTemplate.postForObject(URL2, request, String.class);
         String response = restTemplate.getForObject(URL, String.class);
 
@@ -37,7 +41,6 @@ public class ConsumerRegres {
         log.info("****************************************************");
 
     }
-
 }
 
 
