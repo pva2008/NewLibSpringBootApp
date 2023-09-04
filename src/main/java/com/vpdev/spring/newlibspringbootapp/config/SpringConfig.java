@@ -19,8 +19,6 @@ public class SpringConfig {
         return new RestTemplate();
     }
 
-    RestTemplate restTemplate = new RestTemplate();
-
     //запускает стартовую страницу на маке + добавляем запуск по планировщику
 //    @Scheduled(fixedDelay = 2000)
 //    @Scheduled(fixedDelayString = "${interval}")

@@ -5,7 +5,7 @@ import com.vpdev.spring.newlibspringbootapp.dto.BookDTO;
 import com.vpdev.spring.newlibspringbootapp.dto.BookWrapperRequest;
 import com.vpdev.spring.newlibspringbootapp.models.Book;
 import com.vpdev.spring.newlibspringbootapp.services.BooksService;
-import com.vpdev.spring.newlibspringbootapp.services.HumanService;
+import com.vpdev.spring.newlibspringbootapp.services.RestTemplateService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,24 +24,19 @@ import java.util.List;
 @Slf4j
 public class BookController {
     private final BooksService booksService;
-    private final HumanService humanService;
-    private final RestTemplate restTemplate;
     private final ModelMapper modelMapper;
+    private final RestTemplateService restTemplateService;
 
     @Autowired
-    public BookController(BooksService booksService, HumanService humanService, RestTemplate restTemplate, ModelMapper modelMapper) {
+    public BookController(BooksService booksService, ModelMapper modelMapper, RestTemplateService restTemplateService) {
         this.booksService = booksService;
-        this.humanService = humanService;
-        this.restTemplate = restTemplate;
         this.modelMapper = modelMapper;
+        this.restTemplateService = restTemplateService;
     }
 
     @GetMapping("/rest")
     public String getAllFromOldLibAndShow(Model model) {
-        String URL = "http://localhost:8080/restbook";
-        BookWrapperRequest response = restTemplate.getForObject(URL, BookWrapperRequest.class);
-        List<Book> books = convertListToBook(response);
-        books = booksService.enreachBooks(books);
+        List<Book> books = booksService.enreachBooks(convertListToBook(restTemplateService.responseRestBook()));
         model.addAttribute("FromOldLibList", books);
         return "books/show";
     }
@@ -50,23 +44,11 @@ public class BookController {
 
     @GetMapping("/restsavetodb")
     public String getAndSaveToDBFromOldLib(Model model) {
-        String URL = "http://localhost:8080/restbook";
-        BookWrapperRequest response = restTemplate.getForObject(URL, BookWrapperRequest.class);
         @Valid
-        List<Book> books = convertListToBook(response);
+        List<Book> books = convertListToBook(restTemplateService.responseRestBook());
         booksService.enreachAndAddBooksToDB(books);
         log.info("books-->> {}", books);
         model.addAttribute("FromOldLibList", booksService.findAll());
-        List<Integer> list = new ArrayList();
-        int sum = 0;
-        for (int i = 10; i <= 190; i++) {
-            list.add(i);
-        }
-        for (int i = 0; i < list.size(); i++) {
-            sum = sum + list.get(i);
-        }
-        sum = sum / list.size();
-        System.out.println(sum);
         return "books/show";
     }
 
