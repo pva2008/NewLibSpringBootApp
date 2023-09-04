@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface HumanRepository extends JpaRepository<Human, Integer> {
-
     public Optional<Human> findByFio(String fio);
 }

@@ -7,8 +7,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class BookDTO {
-
-
     @NotEmpty(message = "Название книги не должно быть пустым")
     @Size(min = 2, max = 200, message = " название книги должно быть от 2 до 200")
     @Column(name = "title")

@@ -11,11 +11,9 @@ import static com.vpdev.spring.newlibspringbootapp.config.SpringConfig.openHomeP
 
 @SpringBootApplication
 public class NewLibSpringBootAppApplication {
-
     public static void main(String[] args) throws IOException {
         SpringApplication.run(NewLibSpringBootAppApplication.class, args);
         openHomePage();
         regresApi();
     }
-
 }

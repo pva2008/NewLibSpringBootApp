@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class HumanDTO {
-
     @NotEmpty(message = "Данное поле должно быть не пустое")
     @Size(min = 3, max = 20, message = "Значение должно быть в пределах 3-20")
     @Column(name = "fio")

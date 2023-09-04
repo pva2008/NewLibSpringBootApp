@@ -15,19 +15,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
 @Transactional(readOnly = true)
 public class BooksService {
-
     BooksRepository booksRepository;
 
     @Autowired
     public BooksService(BooksRepository booksRepository) {
         this.booksRepository = booksRepository;
     }
-
     public List<Book> findWithPagination(Integer page, Integer booksPerPage, boolean sortByYear) {
-
         if (sortByYear)
             return booksRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("bookYear"))).getContent();
         else
@@ -35,7 +31,6 @@ public class BooksService {
     }
 
     public List<Book> findAll(boolean sortByYear) {
-
         if (sortByYear)
             return booksRepository.findAll(Sort.by("bookYear"));
         else
@@ -43,43 +38,34 @@ public class BooksService {
     }
 
     public List<Book> findAll() {
-
         return booksRepository.findAll();
     }
 
-
     public Book findById(int id) {
-
         return booksRepository.findById(id).orElse(null);
     }
 
     public List<Book> findByTitleStartingWith(String query) {
-
         return booksRepository.findByTitleStartingWith(query);
     }
 
     @Transactional
     public void save(Book book) {
-
         booksRepository.save(book);
     }
 
     @Transactional
     public void update(int id, Book book) {
-
         book.setBookId(id);
         book.setOwner(booksRepository.findById(id).get().getOwner());
         booksRepository.save(book);
-
     }
 
     @Transactional
     public void deleteById(int id) {
         booksRepository.deleteById(id);
     }
-
     public Optional<Human> getBookOwner(int id) {
-
         return booksRepository.findById(id).map(Book::getOwner);
     }
 
@@ -89,9 +75,7 @@ public class BooksService {
         {
             book.setOwner(null);
             book.setTakenAt(null);
-
         });
-
     }
 
     @Transactional
@@ -100,7 +84,6 @@ public class BooksService {
         {
             book.setOwner(selectedHuman);
             book.setTakenAt(new Date());
-
         });
     }
 
@@ -118,9 +101,7 @@ public class BooksService {
         }).toList();
 //        for (Book book : enreachlist) {
 //            booksRepository.save(book);
-//
 //        }
-
         return enreachlist;
     }
 
@@ -133,7 +114,6 @@ public class BooksService {
         }).toList();
         for (Book book : enreachlist) {
             booksRepository.save(book);
-
         }
     }
 }

@@ -1,10 +1,8 @@
 package com.vpdev.spring.newlibspringbootapp.models;
 
 public class Translations {
-
     private String text;
     private String detectedLanguageCode;
-
 
     public String getText() {
         return text;

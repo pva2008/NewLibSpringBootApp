@@ -12,25 +12,16 @@ import java.util.Map;
 @Component
 @Slf4j
 public class ConsumerRegres {
-
-
     public static void regresApi() {
-
         String URL = "https://reqres.in/api/users/3";
         String URL2 = "https://reqres.in/api/users";
-
         Map<String, String> mapToSend = new HashMap<>();
-
         RestTemplate restTemplate = new RestTemplate();
-
         mapToSend.put("name", "Valera");
         mapToSend.put("job", "data engineer");
-
         HttpEntity<Map<String, String>> request = new HttpEntity<>(mapToSend);
-
         String string = restTemplate.postForObject(URL2, request, String.class);
         String response = restTemplate.getForObject(URL, String.class);
-
         System.out.println("*******************reqres.in************************");
         System.out.println(string);
         System.out.println(response);
@@ -39,7 +30,6 @@ public class ConsumerRegres {
         log.info(string);
         log.info(response);
         log.info("****************************************************");
-
     }
 }
 

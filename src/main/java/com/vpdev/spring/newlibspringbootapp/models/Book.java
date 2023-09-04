@@ -16,7 +16,6 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookId;
 
-
     @NotEmpty(message = "Название книги не должно быть пустым")
     @Size(min = 2, max = 200, message = " название книги должно быть от 2 до 200")
     @Column(name = "title")
@@ -38,7 +37,6 @@ public class Book {
     @Column(name = "taken_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date takenAt;
-
 
     public Book() {
     }
@@ -96,6 +94,4 @@ public class Book {
     public void setTakenAt(Date takenAt) {
         this.takenAt = takenAt;
     }
-
-
 }
